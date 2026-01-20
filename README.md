@@ -50,7 +50,7 @@ Tenancy is enforced via:
 
 ### Organisations (Tenants)
 
-- Users can belong to multiple companies
+- Users can belong to multiple organisations
 - Each organisation acts as a logical tenant
 - All business data is scoped to organisation
 
@@ -101,9 +101,9 @@ A configurable request/workflow system used to model internal business operation
 
 ### Super Admin Capabilities
 
-- View all companies
+- View all organisations
 - Impersonate users
-- Suspend companies
+- Suspend organisations
 - Global metrics dashboard
 
 ---
