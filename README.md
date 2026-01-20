@@ -34,8 +34,8 @@ To keep the scope focused, this project intentionally avoids:
 - **Framework:** Laravel
 - **Admin UI:** Filament
 - **Database:** Single database, shared schema
-- **Tenancy Model:** Company-based (team-style tenancy)
-- **Authorisation:** Role & permission-based (scoped per company)
+- **Tenancy Model:** Organisation-based (team-style tenancy)
+- **Authorisation:** Role & permission-based (scoped per organisation)
 - **Async Processing:** Laravel queues
 - **Audit & Logging:** Activity-based event logging
 
@@ -48,11 +48,17 @@ Tenancy is enforced via:
 
 ## Core Concepts
 
-### Companies (Tenants)
+### Organisations (Tenants)
 
 - Users can belong to multiple companies
-- Each company acts as a logical tenant
-- All business data is scoped to company
+- Each organisation acts as a logical tenant
+- All business data is scoped to organisation
+
+### Users & Organisations
+
+Users can belong to multiple organisations.  
+Roles are assigned per organisation via a pivot table.  
+All business data is scoped to an organisation.
 
 ### Users & Roles
 
@@ -61,7 +67,7 @@ Tenancy is enforced via:
 - Manager
 - Viewer
 
-Roles are assigned per company and determine access to:
+Roles are assigned per organisation and determine access to:
 - Resources
 - Actions
 - Workflow transitions
@@ -70,9 +76,9 @@ Roles are assigned per company and determine access to:
 
 ## Features
 
-### Company Management
+### Organisation Management
 
-- Create and manage a company
+- Create and manage a organisation
 - Invite users by email
 - Assign and revoke roles
 - Suspend or remove members
@@ -81,7 +87,7 @@ Roles are assigned per company and determine access to:
 
 A configurable request/workflow system used to model internal business operations.
 
-- Request types configurable per company
+- Request types configurable per organisation
 - Status-based workflows
 - Role-restricted status transitions
 - Comments and file attachments
@@ -89,7 +95,7 @@ A configurable request/workflow system used to model internal business operation
 
 ### Audit & Activity Logging
 
-- User actions tracked per company
+- User actions tracked per organisation
 - Before/after state snapshots
 - Immutable audit history
 
