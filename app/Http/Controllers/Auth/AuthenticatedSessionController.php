@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
+use App\Services\OrganisationContext;
 use Filament\Facades\Filament;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,10 +28,17 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(Filament::getDefaultPanel());
+        /** @var User $user */
+        $user = auth()->user();
+
+        if ($user->organisations()->count() === 1) {
+            app(OrganisationContext::class)
+                ->set($user->organisations()->first());
+        }
+
+        return redirect()->intended(Filament::getUrl());
     }
 
     /**
